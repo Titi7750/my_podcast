@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +32,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::resource('podcasts', PodcastController::class)->middleware('auth');
+
+// Route::get('/auth/redirect', function () {
+//     return Socialite::driver('microsoft')->redirect();
+// });
+
+// Route::get('/auth/callback', function () {
+//     $microsoftUser = Socialite::driver('microsoft')->user();
+
+//     $user = User::firstOrCreate([
+//         'email' => $microsoftUser->getEmail(),
+//     ], [
+//         'name' => $microsoftUser->getName(),
+//     ]);
+
+//     Auth::login($user);
+
+//     return redirect('/dashboard');
+// });
+
+require __DIR__ . '/auth.php';
