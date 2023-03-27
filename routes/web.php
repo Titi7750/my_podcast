@@ -18,9 +18,8 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PodcastController::class, 'index'])->name('podcasts.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,6 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('podcasts', PodcastController::class)->middleware('auth');
+
+Route::get('/my-podcasts', [PodcastController::class, 'MyPodcasts'])->name('podcasts.my_podcasts');
 
 // Route::get('/auth/redirect', function () {
 //     return Socialite::driver('microsoft')->redirect();
