@@ -10,8 +10,17 @@
 </head>
 
 <body>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <h1>Ajouter mon Podcast :</h1>
-    <form action="{{ route('podcasts.store') }}" method="POST">
+    <form action="{{ route('podcasts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <p>
             <label for="title">Titre</label>
@@ -22,15 +31,15 @@
         </p>
         <p>
             <label for="description">Description</label>
-            <textarea type="textarea" name="description" id="description"> </textarea>
+            <textarea type="text" name="description" id="description"></textarea>
             @error('description')
             <div>{{ $message }}</div>
         @enderror
         </p>
         <p>
-            <label for="file">Fichier</label>
-            <input type="file" name="file" id="file">
-            @error('file')
+            <label for="podcast">Fichier</label>
+            <input type="file" name="podcast" id="podcast">
+            @error('podcast')
             <div>{{ $message }}</div>
         @enderror
         </p>

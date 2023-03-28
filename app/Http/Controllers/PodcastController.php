@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Podcast;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
 {
@@ -51,18 +52,64 @@ class PodcastController extends Controller
 
     public function create()
     {
-        return view('podcasts.create', ['user' => new Podcast]);
+        return view('podcasts.create', ['podcasts' => new Podcast]);
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'podcast' => 'required',
         ]);
 
-        Podcast::create($validated);
+        $request->request->add(['user_id' => Auth::id()]);
 
-        return redirect()->route('podcasts.index')->with('message', 'Podcast créé');
+        $podcastPath = null;
+        if ($request->hasFile('podcast')) {
+            $podcastPath = $request->file('podcast')->storeAs(
+                'podcasts',
+                Auth::id() . '.' . $request->file('podcast')->getClientOriginalExtension(),
+                'public',
+            );
+        }
+
+        Podcast::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+            'podcast' => $podcastPath,
+        ]);
+
+        return redirect()->route('dashboard')->with('message', 'Podcast créé');
     }
+
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'title' => 'required',
+    //         'description' => 'required',
+    //         'path' => 'required',
+    //     ]);
+
+    //     $request->request->add(['user_id' => Auth::id()]);
+
+    //     $podcastPath = null;
+    //     if ($request->hasFile('path')) {
+    //         $podcastPath = $request->file('path')->storeAs(
+    //             'podcasts',
+    //             Auth::id() . '.' . $request->file('path')->getClientOriginalExtension(),
+    //             'public',
+    //         );
+    //     }
+
+    //     Podcast::create([
+    //         'title' => $request->title,
+    //         'description' => $request->description,
+    //         'user_id' => $request->user_id,
+    //         'path' => $podcastPath,
+    //     ]);
+
+    //     return redirect()->route('dashboard')->with('message', 'Podcast créé');
+    // }
 }
