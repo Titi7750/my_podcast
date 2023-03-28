@@ -29,12 +29,12 @@ class PodcastController extends Controller
     {
         Podcast::destroy($id);
 
-        return redirect()->route('podcasts.index')->with('message', 'Podcast supprimé');
+        return redirect()->route('dashboard')->with('message', 'Podcast supprimé');
     }
 
     public function edit($id)
     {
-        $user = Podcast::findOrFail($id);
+        $podcast = Podcast::findOrFail($id);
         return view('podcasts.edit', compact('podcast'));
     }
 
@@ -47,7 +47,7 @@ class PodcastController extends Controller
 
         Podcast::whereId($id)->update($validated);
 
-        return redirect()->route('podcasts.index')->with('message', 'Podcast modifié');
+        return redirect()->route('dashboard')->with('message', 'Podcast modifié');
     }
 
     public function create()
@@ -83,33 +83,4 @@ class PodcastController extends Controller
 
         return redirect()->route('dashboard')->with('message', 'Podcast créé');
     }
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'title' => 'required',
-    //         'description' => 'required',
-    //         'path' => 'required',
-    //     ]);
-
-    //     $request->request->add(['user_id' => Auth::id()]);
-
-    //     $podcastPath = null;
-    //     if ($request->hasFile('path')) {
-    //         $podcastPath = $request->file('path')->storeAs(
-    //             'podcasts',
-    //             Auth::id() . '.' . $request->file('path')->getClientOriginalExtension(),
-    //             'public',
-    //         );
-    //     }
-
-    //     Podcast::create([
-    //         'title' => $request->title,
-    //         'description' => $request->description,
-    //         'user_id' => $request->user_id,
-    //         'path' => $podcastPath,
-    //     ]);
-
-    //     return redirect()->route('dashboard')->with('message', 'Podcast créé');
-    // }
 }
