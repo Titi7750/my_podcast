@@ -35,6 +35,14 @@
                             class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             @csrf
                             <div class="mb-4">
+                                <label for="image" class="block text-gray-700 font-bold mb-2">Fichier</label>
+                                <input type="file" name="image" id="image" accept="image/*"
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror">
+                                @error('podcast')
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
                                 <label for="title" class="block text-gray-700 font-bold mb-2">Titre</label>
                                 <input type="text" name="title" id="title"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('title') border-red-500 @enderror">

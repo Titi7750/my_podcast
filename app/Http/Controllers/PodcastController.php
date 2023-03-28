@@ -74,11 +74,21 @@ class PodcastController extends Controller
             );
         }
 
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->storeAs(
+                'images',
+                Auth::id() . '.' . $request->file('image')->getClientOriginalExtension(),
+                'public',
+            );
+        }
+
         Podcast::create([
             'title' => $request->title,
             'description' => $request->description,
             'user_id' => $request->user_id,
             'podcast' => $podcastPath,
+            'image' => $imagePath,
         ]);
 
         return redirect()->route('dashboard')->with('message', 'Podcast créé');

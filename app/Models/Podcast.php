@@ -14,5 +14,6 @@ class Podcast extends Model
         'description',
         'podcast',
         'user_id',
+        'image'
     ];
 }

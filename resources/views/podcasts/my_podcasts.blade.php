@@ -37,6 +37,8 @@
                         <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             @foreach ($podcasts as $podcast)
                                 <li class="bg-white rounded-lg shadow-md p-4">
+                                    {{-- <img src="{{ Storage::url('app/public/' . $podcast->image) }}" alt="image du podcast"
+                                        class="w-32 h-32 object-cover"> --}}
                                     <a href="{{ route('podcasts.show', $podcast) }}"
                                         class="block text-lg font-semibold text-slate-900 hover:text-blue-700">{{ $podcast->title }}</a>
                                     <audio class="my-6 pr-12" controls>
