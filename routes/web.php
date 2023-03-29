@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('podcasts', PodcastController::class)->middleware('auth');
 
 Route::get('/my-podcasts', [PodcastController::class, 'MyPodcasts'])->name('podcasts.my_podcasts')->middleware('auth');
+
+Route::resource('users', UsersController::class)->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
