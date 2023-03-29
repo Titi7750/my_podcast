@@ -30,6 +30,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('podcasts', PodcastController::class)->middleware('auth');
 
-Route::get('/my-podcasts', [PodcastController::class, 'MyPodcasts'])->name('podcasts.my_podcasts');
+Route::get('/my-podcasts', [PodcastController::class, 'MyPodcasts'])->name('podcasts.my_podcasts')->middleware('auth');
 
 require __DIR__ . '/auth.php';

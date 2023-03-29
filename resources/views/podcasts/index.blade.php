@@ -40,12 +40,21 @@
                         <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             @foreach ($podcasts as $podcast)
                                 <li class="bg-white rounded-lg shadow-md p-4">
+                                    @if ($podcast->image)
+                                        <img class="w-full h-64 object-cover object-center rounded-lg mb-4"
+                                            src="{{ 'storage/' . $podcast->image }}" alt="{{ $podcast->title }}">
+                                    @endif
+
                                     <h2 class="text-xl font-bold mb-4">{{ $podcast->title }}</h2>
+
                                     <p class="mb-2">Descriptif : {{ $podcast->description }}</p>
-                                    <audio class="my-6 pr-12" controls>
-                                        <source src="{{ asset('storage/app/public/podcasts/' . $podcast->podcast) }}"
-                                            type="audio/*">
-                                    </audio>
+                                    
+                                    @if ($podcast->podcast)
+                                        <audio class="my-6 pr-12" controls>
+                                            <source src="{{ 'storage/' . $podcast->podcast }}"
+                                                type="{{ Storage::mimeType($podcast->podcast) }}">
+                                        </audio>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>

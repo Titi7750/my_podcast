@@ -27,6 +27,12 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="image">Image</label>
+                                <input
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    type="file" name="image" id="image" value="{{ $podcast->image }}">
+                            </div>
+                            <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2" for="title">Titre</label>
                                 <input
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
