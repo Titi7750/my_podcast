@@ -15,14 +15,17 @@
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <form action="{{ route('podcasts.update', $podcast) }}" method="POST"
-                            class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                            class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="mb-4">
-                                <label class="block text-gray-700 font-bold mb-2" for="image">Image</label>
+                                <label class="block text-gray-700 font-bold mb-2" for="image">Image de
+                                    couverture</label>
                                 <input
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    type="file" name="image" id="image" value="{{ $podcast->image }}">
+                                    type="file" name="image" id="image" value="{{ $podcast->image }}"
+                                    accept="image/*">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2" for="title">Titre</label>
@@ -38,10 +41,11 @@
                                     value="{{ $podcast->description }}">
                             </div>
                             <div class="mb-4">
-                                <label class="block text-gray-700 font-bold mb-2" for="podcast">Fichier audio</label>
+                                <label class="block text-gray-700 font-bold mb-2" for="podcast">Podcast</label>
                                 <input
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    type="file" name="podcast" id="podcast" value="{{ $podcast->podcast }}">
+                                    type="file" name="podcast" id="podcast" value="{{ $podcast->podcast }}"
+                                    accept="audio/*">
                             </div>
                             <div class="flex items-center justify-center">
                                 <button

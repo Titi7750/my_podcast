@@ -27,7 +27,8 @@
                             class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             @csrf
                             <div class="mb-4">
-                                <label for="image" class="block text-gray-700 font-bold mb-2">Fichier</label>
+                                <label for="image" class="block text-gray-700 font-bold mb-2">Image de
+                                    couverture</label>
                                 <input type="file" name="image" id="image" accept="image/*"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror">
                                 @error('podcast')
@@ -51,7 +52,7 @@
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="podcast" class="block text-gray-700 font-bold mb-2">Fichier</label>
+                                <label for="podcast" class="block text-gray-700 font-bold mb-2">Podcast</label>
                                 <input type="file" name="podcast" id="podcast" accept="audio/*"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('podcast') border-red-500 @enderror">
                                 @error('podcast')
