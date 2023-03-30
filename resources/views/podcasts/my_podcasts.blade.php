@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr ">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Les Podcasts</title>
-</head>
-
 <body>
     <x-app-layout>
         <x-slot name="header">
@@ -15,9 +8,8 @@
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     {{ __('Mes podcasts') }}
                 </h2>
-                <a class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight hover:underline"
-                    href="{{ route('podcasts.create') }}">Ajouter mon podcast
-                </a>
+                <a href="{{ route('podcasts.create') }}"
+                    class="inline-block px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">{{ __('Ajouter mon podcast') }}</a>
             </div>
         </x-slot>
         <div class="py-12">
@@ -28,6 +20,9 @@
                             <div class="alert alert-success">
                                 {{ session('message') }}
                             </div>
+                        @endif
+                        @if ($podcasts->isEmpty())
+                            <p class="text-center">{{ __('Vous n\'avez pas encore ajouté de podcast') }}</p>
                         @endif
                         <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             @foreach ($podcasts as $podcast)

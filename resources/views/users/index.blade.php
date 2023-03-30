@@ -1,14 +1,6 @@
 <!doctype html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tous les utilisateurs</title>
-</head>
-
 <body>
     <x-app-layout>
         <x-slot name="header">
@@ -16,9 +8,8 @@
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     {{ __('Tous les utilisateurs') }}
                 </h2>
-                <a class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight hover:underline"
-                    href="{{ route('users.create') }}">Ajouter un utilisateur
-                </a>
+                <a href="{{ route('users.create') }}"
+                    class="inline-block px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">{{ __('Ajouter un utilisateur') }}</a>
             </div>
         </x-slot>
         <div class="py-12">

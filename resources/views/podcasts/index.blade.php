@@ -32,6 +32,10 @@
                                 {{ session('message') }}
                             </div>
                         @endif
+                        @if ($podcasts->isEmpty())
+                            <p class="text-center font-semibold">
+                                {{ __('Il n\'y a toujours pas de podcasts en ligne, revenez plus tard') }}</p>
+                        @endif
                         <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             @foreach ($podcasts as $podcast)
                                 <li class="bg-white rounded-lg shadow-md p-4">
