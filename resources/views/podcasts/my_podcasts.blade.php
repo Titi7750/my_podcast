@@ -35,7 +35,7 @@
 
                                     @if ($podcast->image)
                                         <img class="w-full h-64 object-cover object-center rounded-lg mb-4"
-                                            src="{{ 'storage/' . $podcast->image }}" alt="{{ $podcast->title }}">
+                                            src="{{ Storage::url($podcast->image) }}" alt="{{ $podcast->title }}">
                                     @endif
 
                                     <a href="{{ route('podcasts.show', $podcast) }}"
@@ -43,7 +43,8 @@
 
                                     @if ($podcast->podcast)
                                         <audio class="my-6 pr-12" controls>
-                                            <source src="{{ 'storage/' . $podcast->podcast }}" type="{{ Storage::mimeType($podcast->podcast) }}">
+                                            <source src="{{ Storage::url($podcast->podcast) }}"
+                                                type="{{ Storage::mimeType($podcast->podcast) }}">
                                         </audio>
                                     @endif
 

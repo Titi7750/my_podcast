@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Podcast;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PodcastController extends Controller
@@ -58,43 +57,17 @@ class PodcastController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'podcast' => 'required',
         ]);
 
-        $request->request->add(['user_id' => Auth::id()]);
-
-        // $podcastPath = null;
-        // if ($request->hasFile('podcast')) {
-        //     $podcastPath = $request->file('podcast')->storeAs(
-        //         'podcasts',
-        //         Auth::id() . '.' . $request->file('podcast')->getClientOriginalExtension(),
-        //         'public',
-        //     );
-        // }
 
         $podcastPath = Storage::disk('public')->put('podcasts', $request->podcast);
-
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->storeAs(
-        //         'images',
-        //         Auth::id() . '.' . $request->file('image')->getClientOriginalExtension(),
-        //         'public',
-        //     );
-        // }
-
         $imagePath = Storage::disk('public')->put('images', $request->image);
-
-        Podcast::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'user_id' => $request->user_id,
-            'podcast' => $podcastPath,
-            'image' => $imagePath,
-        ]);
+        
+        auth()->user()->podcasts()->create([...$validated, 'podcast' => $podcastPath, 'image' => $imagePath]);
 
         return redirect()->route('dashboard')->with('message', 'Podcast créé');
     }
