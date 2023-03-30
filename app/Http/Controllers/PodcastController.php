@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Podcast;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,6 +23,8 @@ class PodcastController extends Controller
 
     public function show(Podcast $podcast)
     {
+        Gate::authorize('podcast', $podcast);
+
         return view('podcasts.show', ['podcast' => $podcast]);
     }
 
@@ -32,10 +35,12 @@ class PodcastController extends Controller
         return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast supprimé');
     }
 
-    public function edit($id)
+    public function edit(Podcast $podcast)
     {
-        $podcast = Podcast::findOrFail($id);
-        return view('podcasts.edit', compact('podcast'));
+        Gate::authorize('podcast', $podcast);
+
+        $podcast->id;
+        return view('podcasts.edit', ['podcast' => $podcast]);
     }
 
     public function update(Request $request, $id)
@@ -66,7 +71,7 @@ class PodcastController extends Controller
 
         $podcastPath = Storage::disk('public')->put('podcasts', $request->podcast);
         $imagePath = Storage::disk('public')->put('images', $request->image);
-        
+
         auth()->user()->podcasts()->create([...$validated, 'podcast' => $podcastPath, 'image' => $imagePath]);
 
         return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast créé');

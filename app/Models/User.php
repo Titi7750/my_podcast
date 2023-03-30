@@ -43,8 +43,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function podcasts() : HasMany
+    public function podcasts(): HasMany
     {
         return $this->hasMany(Podcast::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->status === 'admin';
     }
 }
