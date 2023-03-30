@@ -33,6 +33,6 @@ Route::resource('podcasts', PodcastController::class)->middleware('auth');
 
 Route::get('/my-podcasts', [PodcastController::class, 'MyPodcasts'])->name('podcasts.my_podcasts')->middleware('auth');
 
-Route::resource('users', UsersController::class)->middleware(['auth']);
+Route::resource('users', UsersController::class)->middleware(['auth', 'admin']);
 
 require __DIR__ . '/auth.php';
