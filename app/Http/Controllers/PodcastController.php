@@ -29,7 +29,7 @@ class PodcastController extends Controller
     {
         Podcast::destroy($id);
 
-        return redirect()->route('dashboard')->with('message', 'Podcast supprimé');
+        return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast supprimé');
     }
 
     public function edit($id)
@@ -47,7 +47,7 @@ class PodcastController extends Controller
 
         Podcast::whereId($id)->update($validated);
 
-        return redirect()->route('dashboard')->with('message', 'Podcast modifié');
+        return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast modifié');
     }
 
     public function create()
@@ -69,6 +69,6 @@ class PodcastController extends Controller
         
         auth()->user()->podcasts()->create([...$validated, 'podcast' => $podcastPath, 'image' => $imagePath]);
 
-        return redirect()->route('dashboard')->with('message', 'Podcast créé');
+        return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast créé');
     }
 }
