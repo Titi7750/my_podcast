@@ -17,12 +17,15 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        $podcasts = $user->podcasts()->get();
+        return view('users.show', ['user' => $user, 'podcasts' => $podcasts]);
     }
 
     public function destroy(string $id)
     {
-        User::destroy($id);
+        $user = User::findOrFail($id);
+        $user->podcasts()->delete();
+        $user->delete();
 
         return redirect()->route('users.index')->with('message', 'Utilisateur supprimé');
     }

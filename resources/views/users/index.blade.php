@@ -30,21 +30,23 @@
                                 {{ session('message') }}
                             </div>
                         @endif
-                        <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                            @foreach ($users as $user)
-                                <li class="bg-white rounded-lg shadow-md p-4">
+                        <div class="text-center">
+                            <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                                @foreach ($users as $user)
+                                    <li class="bg-white rounded-lg shadow-md p-4">
 
-                                    <a href="{{ route('users.show', $user) }}"
-                                        class="block text-lg font-semibold text-slate-900 hover:text-blue-700">{{ $user->name }}</a>
+                                        <a href="{{ route('users.show', $user) }}"
+                                            class="mb-6 block text-lg font-semibold text-slate-900 hover:text-blue-700">{{ $user->name }}</a>
 
-                                    <a href="{{ route('users.edit', $user) }}"
-                                        class="inline-block px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">{{ __('Modifier') }}</a>
+                                        <a href="{{ route('users.edit', $user) }}"
+                                            class="inline-block px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">{{ __('Modifier') }}</a>
 
-                                    <a href="{{ route('users.show', $user) }}"
-                                        class="inline-block px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">{{ __('Informations') }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
+                                        <a href="{{ route('users.show', $user) }}"
+                                            class="inline-block px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">{{ __('Informations') }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
