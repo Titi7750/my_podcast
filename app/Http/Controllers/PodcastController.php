@@ -50,7 +50,25 @@ class PodcastController extends Controller
             'description' => 'required',
         ]);
 
-        Podcast::whereId($id)->update($validated);
+        $podcastPath = null;
+        if ($request->hasFile('podcast')) {
+            $podcastPath = Storage::disk('public')->put('podcasts', $request->podcast);
+        }
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = Storage::disk('public')->put('images', $request->image);
+        }
+
+        if ($podcastPath === null) {
+            $podcastPath = Podcast::where('id', $id)->first()->podcast;
+        }
+
+        if ($imagePath === null) {
+            $imagePath = Podcast::where('id', $id)->first()->image;
+        }
+
+        Podcast::where('id', $id)->update([...$validated, 'podcast' => $podcastPath, 'image' => $imagePath]);
 
         return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast modifié');
     }
