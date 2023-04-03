@@ -15,24 +15,31 @@ Follow these steps to install and configure the Laravel project :
 ```
 git clone https://github.com/Titi7750/my_podcast.git
 ```
+## Command Installation
 
-2. Install the required dependencies with Composer :
+First solution :
+```
+./install.sh
+```
+Second solution step by step :
+
+1. Install the required dependencies with Composer :
 ```
 composer install
 ```
 
-3. Copy the .env.example file and rename it .env :
+2. Copy the .env.example file and rename it .env :
 ```
 cp .env.example .env
 ```
 Note: If you are on a Windows operating system, use ```copy``` instead of ```cp```.
 
-4. Generate a Laravel application key :
+3. Generate a Laravel application key :
 ```
 php artisan key:generate
 ````
 
-5. Configure your database details in the .env file :
+4. Configure your database details in the .env file :
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -43,19 +50,19 @@ DB_PASSWORD=DATABASE_PASSWORD
 ```
 Replace DATABASE_NAME, DATABASE_USER, and DATABASE_PASSWORD with your database details.
 
-6. Go create your database in PHPMyAdmin or another alternative.
+5. Go create your database in PHPMyAdmin or another alternative.
 
-7. Run migrations and seeders :
+6. Run migrations and seeders :
 ```
 php artisan migrate --seed
 ```
 
-8. Install JavaScript dependencies with :
+7. Install JavaScript dependencies with :
 ```
 npm install
 ```
 
-9. Configure the details for the Microsoft connection in your .env file :
+8. Configure the details for the Microsoft connection in your .env file :
 ```
 MICROSOFT_CLIENT_ID=''
 MICROSOFT_CLIENT_SECRET=''
@@ -63,7 +70,7 @@ MICROSOFT_TENANT_ID=''
 MICROSOFT_REDIRECT_URI='http://localhost:8000/auth/callback'
 ```
 
-10. To link the Storage folder of your application to the Public folder, run the following command :
+9. To link the Storage folder of your application to the Public folder, run the following command :
 ```
 php artisan storage:link
 ```
