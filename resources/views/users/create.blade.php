@@ -22,7 +22,7 @@
                                 <input type="text" name="name" id="name"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror">
                                 @error('name')
-                                    <div>{{ $message }}</div>
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-4">
@@ -30,7 +30,7 @@
                                 <input type="email" name="email" id="email"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror">
                                 @error('email')
-                                    <div>{{ $message }}</div>
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-4">
@@ -38,15 +38,16 @@
                                 <input type="password" name="password" id="password"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror">
                                 @error('password')
-                                    <div>{{ $message }}</div>
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="password_confirmation" class="block text-gray-700 font-bold mb-2">Confirmation du mot de passe</label>
+                                <label for="password_confirmation"
+                                    class="block text-gray-700 font-bold mb-2">Confirmation du mot de passe</label>
                                 <input type="password" name="password_confirmation" id="password_confirmation"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror">
                                 @error('password_confirmation')
-                                    <div>{{ $message }}</div>
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="flex justify-center">

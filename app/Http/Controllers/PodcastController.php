@@ -48,27 +48,37 @@ class PodcastController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'podcast' => 'mimes:mpga,mp3,wav,ogg,wma,mid',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $podcastPath = null;
-        if ($request->hasFile('podcast')) {
-            $podcastPath = Storage::disk('public')->put('podcasts', $request->podcast);
-        }
+        // $podcastPath = null;
+        // if ($request->hasFile('podcast')) {
+        //     $podcastPath = Storage::disk('public')->put('podcasts', $request->podcast);
+        // }
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = Storage::disk('public')->put('images', $request->image);
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $imagePath = Storage::disk('public')->put('images', $request->image);
+        // }
 
-        if ($podcastPath === null) {
-            $podcastPath = Podcast::where('id', $id)->first()->podcast;
-        }
+        // if ($podcastPath === null) {
+        //     $podcastPath = Podcast::where('id', $id)->first()->podcast;
+        // }
 
-        if ($imagePath === null) {
-            $imagePath = Podcast::where('id', $id)->first()->image;
-        }
+        // if ($imagePath === null) {
+        //     $imagePath = Podcast::where('id', $id)->first()->image;
+        // }
 
-        Podcast::where('id', $id)->update([...$validated, 'podcast' => $podcastPath, 'image' => $imagePath]);
+        $podcastPath = $request->file('podcast') ? Storage::disk('public')->put('podcasts', $request->podcast) : Podcast::where('id', $id)->value('podcast');
+        $imagePath = $request->file('image') ? Storage::disk('public')->put('images', $request->image) : Podcast::where('id', $id)->value('image');
+
+        Podcast::where('id', $id)->update(array_merge($validated, [
+            'podcast' => $podcastPath,
+            'image' => $imagePath,
+        ]));
+
+        // Podcast::where('id', $id)->update([...$validated, 'podcast' => $podcastPath, 'image' => $imagePath]);
 
         return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast modifié');
     }
@@ -83,7 +93,8 @@ class PodcastController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'podcast' => 'required',
+            'podcast' => 'required|mimes:mpga,mp3,wav,ogg,wma,mid,',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
 

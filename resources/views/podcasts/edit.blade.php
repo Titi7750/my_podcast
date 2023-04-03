@@ -26,12 +26,18 @@
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     type="file" name="image" id="image" value="{{ $podcast->image }}"
                                     accept="image/*">
+                                @error('image')
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2" for="title">Titre</label>
                                 <input
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     type="text" name="title" id="title" value="{{ $podcast->title }}">
+                                @error('title')
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2" for="description">Description</label>
@@ -39,6 +45,9 @@
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     type="text" name="description" id="description"
                                     value="{{ $podcast->description }}">
+                                @error('description')
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2" for="podcast">Podcast</label>
@@ -46,6 +55,9 @@
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     type="file" name="podcast" id="podcast" value="{{ $podcast->podcast }}"
                                     accept="audio/*">
+                                @error('podcast')
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="flex items-center justify-center">
                                 <button
@@ -55,16 +67,6 @@
                                 </button>
                             </div>
                         </form>
-
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>

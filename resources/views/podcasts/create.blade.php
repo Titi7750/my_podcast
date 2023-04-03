@@ -10,15 +10,6 @@
                 </h2>
             </div>
         </x-slot>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -31,7 +22,7 @@
                                     couverture</label>
                                 <input type="file" name="image" id="image" accept="image/*"
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror">
-                                @error('podcast')
+                                @error('image')
                                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                 @enderror
                             </div>
