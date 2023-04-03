@@ -52,24 +52,6 @@ class PodcastController extends Controller
             'image' => 'mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        // $podcastPath = null;
-        // if ($request->hasFile('podcast')) {
-        //     $podcastPath = Storage::disk('public')->put('podcasts', $request->podcast);
-        // }
-
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = Storage::disk('public')->put('images', $request->image);
-        // }
-
-        // if ($podcastPath === null) {
-        //     $podcastPath = Podcast::where('id', $id)->first()->podcast;
-        // }
-
-        // if ($imagePath === null) {
-        //     $imagePath = Podcast::where('id', $id)->first()->image;
-        // }
-
         $podcastPath = $request->file('podcast') ? Storage::disk('public')->put('podcasts', $request->podcast) : Podcast::where('id', $id)->value('podcast');
         $imagePath = $request->file('image') ? Storage::disk('public')->put('images', $request->image) : Podcast::where('id', $id)->value('image');
 
@@ -77,8 +59,6 @@ class PodcastController extends Controller
             'podcast' => $podcastPath,
             'image' => $imagePath,
         ]));
-
-        // Podcast::where('id', $id)->update([...$validated, 'podcast' => $podcastPath, 'image' => $imagePath]);
 
         return redirect()->route('podcasts.my_podcasts')->with('message', 'Podcast modifié');
     }
